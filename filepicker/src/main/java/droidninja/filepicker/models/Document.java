@@ -1,13 +1,8 @@
 package droidninja.filepicker.models;
 
-import android.text.TextUtils;
-import android.webkit.MimeTypeMap;
-
-import java.io.File;
-
 import droidninja.filepicker.FilePickerConst;
-import droidninja.filepicker.R;
-import droidninja.filepicker.utils.Utils;
+import droidninja.filepicker.utils.FilePickerUtils;
+import java.io.File;
 
 /**
  * Created by droidNinja on 29/07/16.
@@ -82,7 +77,7 @@ public class Document extends BaseFile {
 
     public boolean isThisType(String[] types)
     {
-        return Utils.contains(types, this.path);
+        return FilePickerUtils.contains(types, this.path);
     }
 
     public FileType getFileType()

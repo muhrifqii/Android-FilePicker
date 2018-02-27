@@ -12,8 +12,11 @@ A filepicker which allows to select images and videos with flexibility. It also 
 
 * As of now, It is only available in jCenter(), So just put this in your app dependencies:
 ```gradle
-    compile 'com.droidninja:filepicker:2.0.8'
+    compile 'com.droidninja:filepicker:2.1.3'
 ```
+
+# Note
+This Filepicker is based on the MediaStore api provided by android. It checks MediaStore database for a file entry. If your file is not showing in the picker, it means that it is not inserted into MediaStore database yet. There is method in `FilePickerUtils` class named `notifyMediaStore(Context context, String path)` through which you can notify the MediaStore database.
   
  # Usage
   
@@ -65,11 +68,13 @@ A filepicker which allows to select images and videos with flexibility. It also 
 
 Method     | Use
 -------- | ---
-setMaxCount(int maxCount) | used to specify maximum count of media picks
-setActivityTheme(int theme)    | used to set theme for toolbar (must be an actionbar theme)
+setMaxCount(int maxCount) | used to specify maximum count of media picks (dont use if you want no limit)
+setActivityTheme(int theme)    | used to set theme for toolbar (must be an non-actionbar theme or use LibAppTheme)
+setActivityTitle(String title)    | used to set title for toolbar
 setSelectedFiles(ArrayList<String> selectedPhotos)     | to show already selected items
 enableVideoPicker(boolean status)    | added video picker alongside images
 enableImagePicker(boolean status)    | added option to disable image picker
+enableSelectAll(boolean status)    | added option to enable/disable select all feature(it will only work with no limit option)
 setCameraPlaceholder(int drawable)    | set custom camera drawable
 withOrientation(Orientation type)  | In case, if you want to set orientation. (*default=Orientation.UNSPECIFIED*)
 showGifs(boolean status)    | to show gifs images in the picker
@@ -83,6 +88,32 @@ If you want to add custom file type picker, use *addFileSupport()* method like t
  ```java
 String zipTypes = {".zip",".rar"};
     addFileSupport("ZIP",zipTypes, R.drawable.ic_zip_icon);
+```
+
+#Styling
+Just override these styles in your main module
+```xml
+<style name="LibAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="PickerTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
+    </style>
+    
+    <style name="SmoothCheckBoxStyle">
+        <item name="color_checked">@color/checkbox_color</item>
+        <item name="color_unchecked">@android:color/white</item>
+        <item name="color_unchecked_stroke">@color/checkbox_unchecked_color</item>
+        <item name="color_tick">@android:color/white</item>
+    </style>
 ```
 
 # Proguard

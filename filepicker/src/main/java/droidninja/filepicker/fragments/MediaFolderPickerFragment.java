@@ -29,7 +29,6 @@ import droidninja.filepicker.PickerManager;
 import droidninja.filepicker.R;
 import droidninja.filepicker.adapters.FolderGridAdapter;
 import droidninja.filepicker.cursors.loadercallbacks.FileResultCallback;
-import droidninja.filepicker.models.Media;
 import droidninja.filepicker.models.PhotoDirectory;
 import droidninja.filepicker.utils.AndroidLifecycleUtils;
 import droidninja.filepicker.utils.GridSpacingItemDecoration;
@@ -101,8 +100,8 @@ public class MediaFolderPickerFragment extends BaseFragment implements FolderGri
     }
 
     private void initView(View view) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-        emptyView = (TextView) view.findViewById(R.id.empty_view);
+        recyclerView =  view.findViewById(R.id.recyclerview);
+        emptyView =  view.findViewById(R.id.empty_view);
         fileType = getArguments().getInt(FILE_TYPE);
 
         imageCaptureManager = new ImageCaptureManager(getActivity());
@@ -243,7 +242,7 @@ public class MediaFolderPickerFragment extends BaseFragment implements FolderGri
             case ImageCaptureManager.REQUEST_TAKE_PHOTO:
                 if(resultCode== Activity.RESULT_OK)
                 {
-                    String imagePath = imageCaptureManager.galleryAddPic();
+                    String imagePath = imageCaptureManager.notifyMediaStoreDatabase();
                     if(imagePath!=null && PickerManager.getInstance().getMaxCount()==1)
                     {
                         PickerManager.getInstance().add(imagePath, FilePickerConst.FILE_TYPE_MEDIA);
