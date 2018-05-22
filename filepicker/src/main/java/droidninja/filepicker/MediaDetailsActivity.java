@@ -146,12 +146,12 @@ public class MediaDetailsActivity extends BaseFilePickerActivity implements File
             medias.addAll(dirs.get(i).getMedias());
         }
 
-        Collections.sort(medias,new Comparator<Media>() {
-            @Override
-            public int compare(Media a, Media b) {
-                return b.getId() - a.getId();
-            }
-        });
+        //Collections.sort(medias,new Comparator<Media>() {
+        //    @Override
+        //    public int compare(Media a, Media b) {
+        //        return b.getId() - a.getId();
+        //    }
+        //});
 
         if(medias.size()>0) {
             emptyView.setVisibility(View.GONE);
