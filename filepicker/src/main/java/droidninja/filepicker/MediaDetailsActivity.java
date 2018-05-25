@@ -69,18 +69,18 @@ public class MediaDetailsActivity extends BaseFilePickerActivity implements File
     }
 
     public void setTitle(int count){
-            ActionBar actionBar = getSupportActionBar();
-            if(actionBar!=null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                int maxCount = PickerManager.getInstance().getMaxCount();
-                if(maxCount == -1 && count>0)
-                    actionBar.setTitle(String.format(getString(R.string.attachments_num), count));
-                else if (maxCount > 0 && count>0)
-                    actionBar.setTitle(String.format(getString(R.string.attachments_title_text), count, maxCount));
-                else {
-                        actionBar.setTitle(photoDirectory.getName());
-                }
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            int maxCount = PickerManager.getInstance().getMaxCount();
+            if(maxCount == -1 && count>0)
+                actionBar.setTitle(String.format(getString(R.string.attachments_num), count));
+            else if (maxCount > 0 && count>0)
+                actionBar.setTitle(String.format(getString(R.string.attachments_title_text), count, maxCount));
+            else {
+                actionBar.setTitle(photoDirectory.getName());
             }
+        }
     }
 
     private void setUpView(PhotoDirectory photoDirectory) {
@@ -121,22 +121,22 @@ public class MediaDetailsActivity extends BaseFilePickerActivity implements File
 
         if(fileType==FilePickerConst.MEDIA_TYPE_IMAGE) {
             MediaStoreHelper.getPhotoDirs(this, mediaStoreArgs,
-                    new FileResultCallback<PhotoDirectory>() {
-                        @Override
-                        public void onResultCallback(List<PhotoDirectory> dirs) {
-                            updateList(dirs);
-                        }
-                    });
+                new FileResultCallback<PhotoDirectory>() {
+                    @Override
+                    public void onResultCallback(List<PhotoDirectory> dirs) {
+                        updateList(dirs);
+                    }
+                });
         }
         else if(fileType==FilePickerConst.MEDIA_TYPE_VIDEO)
         {
             MediaStoreHelper.getVideoDirs(this, mediaStoreArgs,
-                    new FileResultCallback<PhotoDirectory>() {
-                        @Override
-                        public void onResultCallback(List<PhotoDirectory> dirs) {
-                            updateList(dirs);
-                        }
-                    });
+                new FileResultCallback<PhotoDirectory>() {
+                    @Override
+                    public void onResultCallback(List<PhotoDirectory> dirs) {
+                        updateList(dirs);
+                    }
+                });
         }
     }
 
@@ -211,17 +211,17 @@ public class MediaDetailsActivity extends BaseFilePickerActivity implements File
             return true;
         } else if (itemId == R.id.action_select) {
             if (photoGridAdapter != null && selectAllItem!=null) {
-                    if(selectAllItem.isChecked()) {
-                        PickerManager.getInstance().deleteMedia(photoGridAdapter.getSelectedPaths());
-                        photoGridAdapter.clearSelection();
+                if(selectAllItem.isChecked()) {
+                    PickerManager.getInstance().deleteMedia(photoGridAdapter.getSelectedPaths());
+                    photoGridAdapter.clearSelection();
 
-                        selectAllItem.setIcon(R.drawable.ic_deselect_all);
-                    }
-                    else {
-                        photoGridAdapter.selectAll();
-                        PickerManager.getInstance().add(photoGridAdapter.getSelectedPaths(), FilePickerConst.FILE_TYPE_MEDIA);
-                        selectAllItem.setIcon(R.drawable.ic_select_all);
-                    }
+                    selectAllItem.setIcon(R.drawable.ic_deselect_all);
+                }
+                else {
+                    photoGridAdapter.selectAll();
+                    PickerManager.getInstance().add(photoGridAdapter.getSelectedPaths(), FilePickerConst.FILE_TYPE_MEDIA);
+                    selectAllItem.setIcon(R.drawable.ic_select_all);
+                }
                 selectAllItem.setChecked(!selectAllItem.isChecked());
                 setTitle(PickerManager.getInstance().getCurrentCount());
             }

@@ -29,7 +29,7 @@ public class MediaPickerFragment extends BaseFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+        Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_media_picker, container, false);
     }
@@ -41,7 +41,7 @@ public class MediaPickerFragment extends BaseFragment{
             mListener = (MediaPickerFragmentListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement MediaPickerFragment");
+                + " must implement MediaPickerFragment");
         }
     }
 
