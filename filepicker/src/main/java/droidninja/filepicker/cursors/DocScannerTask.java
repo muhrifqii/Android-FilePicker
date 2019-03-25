@@ -7,8 +7,7 @@ import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
-import com.android.internal.util.Predicate;
-
+import io.reactivex.functions.Predicate;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,12 +49,13 @@ public class DocScannerTask extends AsyncTask<Void, Void, Map<FileType, List<Doc
     this.resultCallback = fileResultCallback;
   }
 
-  private HashMap<FileType, List<Document>> createDocumentType(ArrayList<Document> documents) {
+  private HashMap<FileType, List<Document>> createDocumentType(ArrayList<Document> documents)
+      throws Exception {
     HashMap<FileType, List<Document>> documentMap = new HashMap<>();
 
     for (final FileType fileType : fileTypes) {
       Predicate<Document> docContainsTypeExtension = new Predicate<Document>() {
-        public boolean apply(Document document) {
+        public boolean test(Document document) {
           return document.isThisType(fileType.extensions);
         }
       };
@@ -90,7 +90,12 @@ public class DocScannerTask extends AsyncTask<Void, Void, Map<FileType, List<Doc
       cursor.close();
     }
 
-    return createDocumentType(documents);
+    try {
+      return createDocumentType(documents);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new HashMap<>();
+    }
   }
 
   @Override protected void onPostExecute(Map<FileType, List<Document>> documents) {
