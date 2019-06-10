@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import droidninja.filepicker.cursors.PhotoDirectoryLoader;
 import droidninja.filepicker.models.PhotoDirectory;
 import java.lang.ref.WeakReference;
@@ -19,12 +20,12 @@ import static android.provider.MediaStore.MediaColumns.DATA;
 import static android.provider.MediaStore.MediaColumns.DATE_ADDED;
 import static android.provider.MediaStore.MediaColumns.TITLE;
 
-public class PhotoDirLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor> {
+public class VideoDirLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor> {
   public final static int INDEX_ALL_PHOTOS = 0;
   private WeakReference<Context> context;
   private FileResultCallback<PhotoDirectory> resultCallback;
 
-  public PhotoDirLoaderCallbacks(Context context,
+  public VideoDirLoaderCallbacks(Context context,
       FileResultCallback<PhotoDirectory> resultCallback) {
     this.context = new WeakReference<>(context);
     this.resultCallback = resultCallback;
@@ -50,20 +51,19 @@ public class PhotoDirLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cu
       String fileName = data.getString(data.getColumnIndexOrThrow(TITLE));
       int mediaType = data.getInt(data.getColumnIndexOrThrow(MEDIA_TYPE));
 
+      Log.e("DIR ATTR: ", name + " - " + path + " - " + fileName);
+
       PhotoDirectory photoDirectory = new PhotoDirectory();
       photoDirectory.setBucketId(bucketId);
       photoDirectory.setName(name);
 
-      boolean b1 = !path.toLowerCase().endsWith("gif") && !path.toLowerCase().endsWith("mp4");
-      if (b1) {
-        if (!directories.contains(photoDirectory)) {
-          photoDirectory.addPhoto(imageId, fileName, path, mediaType);
-          photoDirectory.setDateAdded(data.getLong(data.getColumnIndexOrThrow(DATE_ADDED)));
-          directories.add(photoDirectory);
-        } else {
-          directories.get(directories.indexOf(photoDirectory))
-              .addPhoto(imageId, fileName, path, mediaType);
-        }
+      if (!directories.contains(photoDirectory)) {
+        photoDirectory.addPhoto(imageId, fileName, path, mediaType);
+        photoDirectory.setDateAdded(data.getLong(data.getColumnIndexOrThrow(DATE_ADDED)));
+        directories.add(photoDirectory);
+      } else {
+        directories.get(directories.indexOf(photoDirectory))
+            .addPhoto(imageId, fileName, path, mediaType);
       }
     }
 

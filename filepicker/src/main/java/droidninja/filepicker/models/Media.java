@@ -60,4 +60,12 @@ public class Media extends BaseFile {
     this.mediaType = mediaType;
   }
 
+  @Override public String toString() {
+    return "Media{" +
+        "mediaType=" + mediaType +
+        ", id=" + id +
+        ", name='" + name + '\'' +
+        ", path='" + path + '\'' +
+        '}';
+  }
 }

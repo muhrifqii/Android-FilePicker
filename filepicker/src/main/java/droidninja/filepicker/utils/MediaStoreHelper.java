@@ -3,6 +3,7 @@ package droidninja.filepicker.utils;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import droidninja.filepicker.cursors.loadercallbacks.VideoDirLoaderCallbacks;
 import java.util.Comparator;
 import java.util.List;
 
@@ -26,9 +27,9 @@ public class MediaStoreHelper {
 
   public static void getVideoDirs(FragmentActivity activity, Bundle args, FileResultCallback<PhotoDirectory> resultCallback) {
     if(activity.getSupportLoaderManager().getLoader(FilePickerConst.MEDIA_TYPE_VIDEO)!=null)
-      activity.getSupportLoaderManager().restartLoader(FilePickerConst.MEDIA_TYPE_VIDEO, args, new PhotoDirLoaderCallbacks(activity, resultCallback));
+      activity.getSupportLoaderManager().restartLoader(FilePickerConst.MEDIA_TYPE_VIDEO, args, new VideoDirLoaderCallbacks(activity, resultCallback));
     else
-      activity.getSupportLoaderManager().initLoader(FilePickerConst.MEDIA_TYPE_VIDEO, args, new PhotoDirLoaderCallbacks(activity, resultCallback));
+      activity.getSupportLoaderManager().initLoader(FilePickerConst.MEDIA_TYPE_VIDEO, args, new VideoDirLoaderCallbacks(activity, resultCallback));
   }
 
   public static void getDocs(FragmentActivity activity,
