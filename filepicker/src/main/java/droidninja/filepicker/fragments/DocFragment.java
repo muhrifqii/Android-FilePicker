@@ -144,7 +144,7 @@ public class DocFragment extends BaseFragment implements FileAdapterListener {
 
         @Override public boolean onQueryTextChange(String newText) {
           if (fileListAdapter != null) {
-            fileListAdapter.getFilter().filter(newText);
+            fileListAdapter.getFilter().filter(newText.toLowerCase());
           }
           return true;
         }
