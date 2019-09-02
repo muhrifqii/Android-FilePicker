@@ -8,6 +8,7 @@ import android.Manifest;
 public class FilePickerConst {
   public static final int REQUEST_CODE_PHOTO = 233;
   public static final int REQUEST_CODE_DOC = 234;
+  public static final int REQUEST_CODE_FILE = 237;
 
   public static final int REQUEST_CODE_MEDIA_DETAIL = 235;
   public static final int REQUEST_CODE_PERMISSION = 988;
