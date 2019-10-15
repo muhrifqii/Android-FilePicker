@@ -147,14 +147,14 @@ public class MediaFolderPickerFragment extends BaseFragment
             @Override
             public void onResultCallback(List<PhotoDirectory> dirs) {
               if (dirs.size() > 0) {
-                for (PhotoDirectory dir : dirs) {
-                  Log.e("DIR NAME: ", dir.getName());
-                  if (dir.getName().toLowerCase().equals("sent")) {
-                    for (Media media : dir.getMedias()) {
-                      Log.e("MEDIA TYPE: ", media.toString());
-                    }
-                  }
-                }
+                //for (PhotoDirectory dir : dirs) {
+                //  Log.e("DIR NAME: ", dir.getName());
+                //  if (dir.getName().toLowerCase().equals("sent")) {
+                //    for (Media media : dir.getMedias()) {
+                //      Log.e("MEDIA TYPE: ", media.toString());
+                //    }
+                //  }
+                //}
                 updateList(dirs);
               }
             }
