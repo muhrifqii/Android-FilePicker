@@ -64,7 +64,7 @@ This Filepicker is based on the MediaStore api provided by android. It checks Me
 
  # Builder Methods
 
-**Android FilePicker** now has more flexibility. Supported builder methods are:
+**Android FilePicker** now has more flexibility. Supported messageBuilder methods are:
 
 Method     | Use
 -------- | ---
