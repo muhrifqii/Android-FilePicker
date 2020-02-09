@@ -185,9 +185,9 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
 
     public PhotoViewHolder(View itemView) {
       super(itemView);
-      checkBox = (SmoothCheckBox) itemView.findViewById(R.id.checkbox);
-      imageView = (ImageView) itemView.findViewById(R.id.iv_photo);
-      videoIcon = (ImageView) itemView.findViewById(R.id.video_icon);
+      checkBox = itemView.findViewById(R.id.checkbox);
+      imageView = itemView.findViewById(R.id.iv_photo);
+      videoIcon = itemView.findViewById(R.id.video_icon);
       selectBg = itemView.findViewById(R.id.transparent_bg);
     }
   }

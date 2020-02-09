@@ -133,9 +133,9 @@ public class FolderGridAdapter extends SelectableAdapter<FolderGridAdapter.Photo
 
     public PhotoViewHolder(View itemView) {
       super(itemView);
-      imageView = (ImageView) itemView.findViewById(R.id.iv_photo);
-      folderTitle = (TextView) itemView.findViewById(R.id.folder_title);
-      folderCount = (TextView) itemView.findViewById(R.id.folder_count);
+      imageView = itemView.findViewById(R.id.iv_photo);
+      folderTitle = itemView.findViewById(R.id.folder_title);
+      folderCount = itemView.findViewById(R.id.folder_count);
       bottomOverlay = itemView.findViewById(R.id.bottomOverlay);
       selectBg = itemView.findViewById(R.id.transparent_bg);
     }
