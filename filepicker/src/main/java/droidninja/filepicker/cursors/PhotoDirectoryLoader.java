@@ -8,6 +8,8 @@ import android.provider.MediaStore.Images.Media;
 import androidx.loader.content.CursorLoader;
 import droidninja.filepicker.FilePickerConst;
 
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE;
+
 public class PhotoDirectoryLoader extends CursorLoader {
 
   final String[] IMAGE_PROJECTION = {
@@ -16,7 +18,9 @@ public class PhotoDirectoryLoader extends CursorLoader {
       Media.BUCKET_ID,
       Media.BUCKET_DISPLAY_NAME,
       Media.DATE_ADDED,
-          Media.TITLE
+          Media.TITLE,
+      MediaStore.Files.FileColumns.SIZE,
+      MEDIA_TYPE
   };
 
   public PhotoDirectoryLoader(Context context, Bundle args) {
@@ -24,16 +28,16 @@ public class PhotoDirectoryLoader extends CursorLoader {
     String bucketId = args.getString(FilePickerConst.EXTRA_BUCKET_ID, null);
     int mediaType = args.getInt(FilePickerConst.EXTRA_FILE_TYPE, FilePickerConst.MEDIA_TYPE_IMAGE);
 
-    setProjection(null);
+    setProjection(IMAGE_PROJECTION);
     setUri(MediaStore.Files.getContentUri("external"));
     setSortOrder(Media._ID + " DESC");
 
-    String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "="
+    String selection = MEDIA_TYPE + "="
             + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
     if(mediaType==FilePickerConst.MEDIA_TYPE_VIDEO)
     {
-        selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "="
+        selection = MEDIA_TYPE + "="
               + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
     }
 

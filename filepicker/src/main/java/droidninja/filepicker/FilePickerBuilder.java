@@ -49,6 +49,11 @@ public class FilePickerBuilder {
     return this;
   }
 
+  public FilePickerBuilder setMaxFileSize(double maxFileSize) {
+    PickerManager.getInstance().setMaxFileSize(maxFileSize);
+    return this;
+  }
+
   public FilePickerBuilder enableVideoPicker(boolean status) {
     PickerManager.getInstance().setShowVideos(status);
     return this;
