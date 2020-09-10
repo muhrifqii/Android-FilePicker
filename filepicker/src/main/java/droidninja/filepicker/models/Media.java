@@ -4,13 +4,13 @@ public class Media extends BaseFile {
 
   public int mediaType;
 
-  public Media(int id, String name, String path, int mediaType) {
-    super(id, name, path);
+  public Media(int id, String name, String path, int mediaType, double fileSize) {
+    super(id, name, path, fileSize);
     this.mediaType = mediaType;
   }
 
   public Media() {
-    super(0,null,null);
+    super(0,null,null,0);
   }
 
   @Override
@@ -58,6 +58,14 @@ public class Media extends BaseFile {
 
   public void setMediaType(int mediaType) {
     this.mediaType = mediaType;
+  }
+
+  public double getFileSize() {
+    return fileSize;
+  }
+
+  public void setFileSize(double fileSize) {
+    this.fileSize = fileSize;
   }
 
   @Override public String toString() {

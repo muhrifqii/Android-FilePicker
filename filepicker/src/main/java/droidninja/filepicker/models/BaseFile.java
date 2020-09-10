@@ -11,21 +11,24 @@ public class BaseFile implements Parcelable {
   protected int id;
   protected String name;
   protected String path;
+  protected double fileSize;
 
   public BaseFile() {
 
   }
 
-  public BaseFile(int id, String name, String path) {
+  public BaseFile(int id, String name, String path, double fileSize) {
     this.id = id;
     this.name = name;
     this.path = path;
+    this.fileSize = fileSize;
   }
 
   protected BaseFile(Parcel in) {
     id = in.readInt();
     name = in.readString();
     path = in.readString();
+    fileSize = in.readDouble();
   }
 
   public static final Creator<BaseFile> CREATOR = new Creator<BaseFile>() {
@@ -78,5 +81,6 @@ public class BaseFile implements Parcelable {
     parcel.writeInt(id);
     parcel.writeString(name);
     parcel.writeString(path);
+    parcel.writeDouble(fileSize);
   }
 }

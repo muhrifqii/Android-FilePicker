@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.DrawableRes;
-import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
 import android.widget.Toast;
+
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+
 import droidninja.filepicker.models.FileType;
 import droidninja.filepicker.models.sort.SortingTypes;
 import droidninja.filepicker.utils.Orientation;
-import java.util.ArrayList;
 
 /**
  * Created by droidNinja on 29/07/16.
@@ -49,8 +52,13 @@ public class FilePickerBuilder {
     return this;
   }
 
-  public FilePickerBuilder setMaxFileSize(double maxFileSize) {
+  public FilePickerBuilder setMaxFileSize(int maxFileSize) {
     PickerManager.getInstance().setMaxFileSize(maxFileSize);
+    return this;
+  }
+
+  public FilePickerBuilder setMaxMediaSize(int maxMediaSize) {
+    PickerManager.getInstance().setMaxMediaSize(maxMediaSize);
     return this;
   }
 

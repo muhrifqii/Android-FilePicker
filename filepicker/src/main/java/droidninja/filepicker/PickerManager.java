@@ -1,11 +1,12 @@
 package droidninja.filepicker;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+
 import droidninja.filepicker.models.BaseFile;
 import droidninja.filepicker.models.FileType;
 import droidninja.filepicker.models.sort.SortingTypes;
 import droidninja.filepicker.utils.Orientation;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 
 /**
  * Created by droidNinja on 29/07/16.
@@ -32,7 +33,9 @@ public class PickerManager {
 
   private boolean showVideos;
 
-  private double maxFileSize;
+  private int maxFileSize;
+
+  private int maxMediaSize;
 
   private boolean showGif;
 
@@ -154,12 +157,20 @@ public class PickerManager {
     this.showVideos = showVideos;
   }
 
-  public double getMaxFileSize() {
+  public int getMaxFileSize() {
     return maxFileSize;
   }
 
-  public void setMaxFileSize(double maxFileSize) {
+  public void setMaxFileSize(int maxFileSize) {
     this.maxFileSize = maxFileSize;
+  }
+
+  public int getMaxMediaSize() {
+    return maxMediaSize;
+  }
+
+  public void setMaxMediaSize(int maxMediaSize) {
+    this.maxMediaSize = maxMediaSize;
   }
 
   public boolean showImages() {

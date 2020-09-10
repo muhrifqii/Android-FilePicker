@@ -3,9 +3,11 @@ package droidninja.filepicker.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import droidninja.filepicker.FilePickerConst;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import droidninja.filepicker.FilePickerConst;
 
 public class PhotoDirectory extends BaseFile implements Parcelable{
 
@@ -20,8 +22,8 @@ public class PhotoDirectory extends BaseFile implements Parcelable{
     super();
   }
 
-  public PhotoDirectory(int id, String name, String path) {
-    super(id, name, path);
+  public PhotoDirectory(int id, String name, String path, double fileSize) {
+    super(id, name, path, fileSize);
   }
 
   protected PhotoDirectory(Parcel in) {
@@ -129,8 +131,8 @@ public class PhotoDirectory extends BaseFile implements Parcelable{
     return paths;
   }
 
-  public void addPhoto(int id, String name, String path, int mediaType) {
-    medias.add(new Media(id, name, path, mediaType));
+  public void addPhoto(int id, String name, String path, int mediaType, double fileSize) {
+    medias.add(new Media(id, name, path, mediaType, fileSize));
   }
 
   public void addPhoto(Media media) {

@@ -1,13 +1,17 @@
 package droidninja.filepicker.adapters;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.DialogInterface;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
@@ -110,15 +114,31 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
       holder.checkBox.setVisibility(isSelected(media) ? View.VISIBLE : View.GONE);
 
       holder.checkBox.setOnCheckedChangeListener(new SmoothCheckBox.OnCheckedChangeListener() {
+        @SuppressLint("StringFormatMatches")
         @Override
         public void onCheckedChanged(SmoothCheckBox checkBox, boolean isChecked) {
+          if(media.getFileSize() > (PickerManager.getInstance()
+                  .getMaxMediaSize() * 1000000)) {
+            AlertDialog.Builder aBuilder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+            aBuilder.setTitle(R.string.app_name);
+            aBuilder.setMessage(String.format(context.getString(R.string.max_file_size_alert_dialog), PickerManager.getInstance()
+                    .getMaxMediaSize()));
+            aBuilder.setPositiveButton(R.string.default_positive_button_text, new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+              }
+            });
+            aBuilder.show();
+            return;
+          }
           toggleSelection(media);
           holder.selectBg.setVisibility(isChecked ? View.VISIBLE : View.GONE);
 
           if (isChecked)
           {
-            holder.checkBox.setVisibility(View.VISIBLE);
-            PickerManager.getInstance().add(media.getPath(), FilePickerConst.FILE_TYPE_MEDIA);
+              holder.checkBox.setVisibility(View.VISIBLE);
+              PickerManager.getInstance().add(media.getPath(), FilePickerConst.FILE_TYPE_MEDIA);
           }
           else
           {

@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
-import io.reactivex.functions.Predicate;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +20,7 @@ import droidninja.filepicker.cursors.loadercallbacks.FileMapResultCallback;
 import droidninja.filepicker.models.Document;
 import droidninja.filepicker.models.FileType;
 import droidninja.filepicker.utils.FilePickerUtils;
+import io.reactivex.functions.Predicate;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.MediaStore.MediaColumns.DATA;
@@ -118,7 +118,7 @@ public class DocScannerTask extends AsyncTask<Void, Void, Map<FileType, List<Doc
         File file = new File(path);
         if (fileType != null && !file.isDirectory() && file.exists()) {
 
-          Document document = new Document(imageId, title, path);
+          Document document = new Document(imageId, title, path, Double.parseDouble(data.getString(data.getColumnIndexOrThrow(MediaStore.Files.FileColumns.SIZE))));
           document.setFileType(fileType);
 
           String mimeType =

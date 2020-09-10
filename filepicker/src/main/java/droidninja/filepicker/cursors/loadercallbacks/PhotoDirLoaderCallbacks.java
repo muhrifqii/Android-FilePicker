@@ -4,14 +4,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
-import droidninja.filepicker.PickerManager;
-import droidninja.filepicker.cursors.PhotoDirectoryLoader;
-import droidninja.filepicker.models.PhotoDirectory;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import droidninja.filepicker.cursors.PhotoDirectoryLoader;
+import droidninja.filepicker.models.PhotoDirectory;
 
 import static android.provider.BaseColumns._ID;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE;
@@ -91,19 +93,19 @@ public class PhotoDirLoaderCallbacks
 
   }
 
-  private boolean addPhoto(String fileSize,
+  private boolean addPhoto(String fs,
       PhotoDirectory photoDirectory, int imageId, String fileName,
       String path, int mediaType) {
-    if (fileSize != null) {
-      if (Double.parseDouble(fileSize) <= PickerManager.getInstance()
-          .getMaxFileSize() && Double.parseDouble(fileSize) > 0) {
-        photoDirectory.addPhoto(imageId, fileName, path, mediaType);
+    if (fs != null) {
+      double fileSize = Double.parseDouble(fs);
+      if (fileSize > 0) {
+        photoDirectory.addPhoto(imageId, fileName, path, mediaType, fileSize);
         return true;
       }else{
         return false;
       }
     } else {
-      photoDirectory.addPhoto(imageId, fileName, path, mediaType);
+      photoDirectory.addPhoto(imageId, fileName, path, mediaType, 0);
       return true;
     }
   }

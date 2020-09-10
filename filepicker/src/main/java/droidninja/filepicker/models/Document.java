@@ -1,8 +1,8 @@
 package droidninja.filepicker.models;
 
-import droidninja.filepicker.FilePickerConst;
-import droidninja.filepicker.utils.FilePickerUtils;
 import java.io.File;
+
+import droidninja.filepicker.utils.FilePickerUtils;
 
 /**
  * Created by droidNinja on 29/07/16.
@@ -12,12 +12,12 @@ public class Document extends BaseFile {
     private String size;
     private FileType fileType;
 
-    public Document(int id, String title, String path) {
-        super(id,title,path);
+    public Document(int id, String title, String path, double fileSize) {
+        super(id,title,path, fileSize);
     }
 
     public Document() {
-        super(0,null,null);
+        super(0,null,null,0);
     }
 
     @Override
@@ -65,6 +65,14 @@ public class Document extends BaseFile {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public double getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(double fileSize) {
+        this.fileSize = fileSize;
     }
 
     public String getTitle() {

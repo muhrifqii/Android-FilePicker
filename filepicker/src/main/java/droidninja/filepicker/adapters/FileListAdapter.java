@@ -1,7 +1,9 @@
 package droidninja.filepicker.adapters;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.DialogInterface;
 import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +93,25 @@ public class FileListAdapter extends SelectableAdapter<FileListAdapter.FileViewH
     });
   }
 
+  @SuppressLint("StringFormatMatches")
   private void onItemClicked(Document document, FileViewHolder holder) {
+    if(Math.round(document.getFileSize()) > (PickerManager.getInstance()
+            .getMaxFileSize() * 1000000)) {
+      AlertDialog.Builder aBuilder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+      aBuilder.setTitle(R.string.app_name);
+      aBuilder.setMessage(String.format(context.getString(R.string.max_file_size_alert_dialog), PickerManager.getInstance()
+              .getMaxFileSize()));
+      aBuilder.setPositiveButton(R.string.default_positive_button_text, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          dialog.dismiss();
+        }
+      });
+      aBuilder.show();
+      return;
+    }
     if (PickerManager.getInstance().getMaxCount() == 1) {
-      PickerManager.getInstance().add(document.getPath(), FilePickerConst.FILE_TYPE_DOCUMENT);
+        PickerManager.getInstance().add(document.getPath(), FilePickerConst.FILE_TYPE_DOCUMENT);
     } else {
       if (holder.checkBox.isChecked()) {
         PickerManager.getInstance().remove(document.getPath(), FilePickerConst.FILE_TYPE_DOCUMENT);
